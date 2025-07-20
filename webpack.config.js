@@ -13,7 +13,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
     chunkFilename: '[name].js',
-    publicPath: './', // ← GitHub Pages対応：相対パスにする
+    publicPath: './', 
   },
   resolve: {
     extensions: ['.js', '.ts']
