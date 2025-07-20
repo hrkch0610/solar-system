@@ -10,11 +10,12 @@ module.exports = {
     mode: 'development',
     entry: './src/app.ts',
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js',
-        chunkFilename: 'vendor.js',
-        publicPath: './' 
-    },
+  path: path.resolve(__dirname, 'dist'),
+  filename: '[name].js',
+  chunkFilename: '[name].js',
+  publicPath: './', 
+},
+
     resolve: {
         extensions: ['.js', '.ts']
     },
