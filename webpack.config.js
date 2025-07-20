@@ -10,10 +10,10 @@ module.exports = {
   mode: 'development',
   entry: './src/app.ts',
   output: {
-  filename: 'main.js',
-  chunkFilename: '[name].js',  // ←これで難読ファイル名を防ぐ
-  publicPath: './',            // ←GitHub Pagesでは必須
+  filename: 'main.js',                // ← これで確実に main.js になる
+  chunkFilename: 'vendor.js',         // ← OrbitControls などをまとめて1ファイルに
   path: path.resolve(__dirname, 'dist'),
+  publicPath: './'                    // ← 相対パス（GitHub Pages対策）
 },
   resolve: {
     extensions: ['.js', '.ts']
