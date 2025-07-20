@@ -10,7 +10,7 @@ module.exports = {
   mode: 'development',
   entry: './src/app.ts',
   output: {
-  filename: '[name].js',
+  filename: 'main.js',
   chunkFilename: '[name].js',  // ←これで難読ファイル名を防ぐ
   publicPath: './',            // ←GitHub Pagesでは必須
   path: path.resolve(__dirname, 'dist'),
