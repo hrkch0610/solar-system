@@ -10,11 +10,11 @@ module.exports = {
   mode: 'development',
   entry: './src/app.ts',
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
-    chunkFilename: '[name].js',
-    publicPath: './', 
-  },
+  filename: '[name].js',
+  chunkFilename: '[name].js',  // ←これで難読ファイル名を防ぐ
+  publicPath: './',            // ←GitHub Pagesでは必須
+  path: path.resolve(__dirname, 'dist'),
+},
   resolve: {
     extensions: ['.js', '.ts']
   },
@@ -38,11 +38,11 @@ module.exports = {
       },
     ],
   },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
-  },
+  // optimization: {
+  //   splitChunks: {
+  //     chunks: 'all',
+  //   },
+  // },
   plugins: [
     new HtmlWebpackPlugin(),
     new CopyPlugin({
