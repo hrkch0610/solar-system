@@ -13,6 +13,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
         chunkFilename: 'vendor.js',
+        publicPath: './' 
     },
     resolve: {
         extensions: ['.js', '.ts']
