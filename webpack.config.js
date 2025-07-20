@@ -7,68 +7,67 @@ const threeVectorCloneTransformerFactory = require('./threeVectorCloneTransforme
  * @type import('webpack').Configuration
  */
 module.exports = {
-    mode: 'development',
-    entry: './src/app.ts',
-    output: {
-  path: path.resolve(__dirname, 'dist'),
-  filename: '[name].js',
-  chunkFilename: '[name].js',
-  publicPath: './', 
-},
-
-    resolve: {
-        extensions: ['.js', '.ts']
-    },
-    module: {
-        rules: [
-            {
-                test: /\.ts$/,
-                loader: 'ts-loader',
-                options: {
-                    getCustomTransformers: (program) => ({
-                        before: [threeVectorCloneTransformerFactory(program)]
-                    }),
-                }
-            },
-            {
-                test: /\.(vs|fs|txt)$/,
-                include: [
-                    path.resolve(__dirname, "src"),
-                ],
-                loader: 'raw-loader',
-            },
+  mode: 'development',
+  entry: './src/app.ts',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
+    chunkFilename: '[name].js',
+    publicPath: './', // ← GitHub Pages対応：相対パスにする
+  },
+  resolve: {
+    extensions: ['.js', '.ts']
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        options: {
+          getCustomTransformers: (program) => ({
+            before: [threeVectorCloneTransformerFactory(program)]
+          }),
+        }
+      },
+      {
+        test: /\.(vs|fs|txt)$/,
+        include: [
+          path.resolve(__dirname, 'src'),
         ],
-    },
-    optimization: {
-        splitChunks: {
-            chunks: "all",
-        },
-    },
-    plugins: [
-        new HtmlWebpackPlugin(),
-        new CopyPlugin({
-            patterns: [
-                {
-                    from: '**/*',
-                    context: 'src',
-                    globOptions: {
-                        ignore: ['**/*.ts', '**/*.js', '**/*.fs', '**/*.vs', '**/*.txt']
-                    },
-                    noErrorOnMissing: true,
-                },
-                {
-                    from: '**/*',
-                    context: 'assets',
-                    noErrorOnMissing: true,
-                }
-            ],
-        }),
+        loader: 'raw-loader',
+      },
     ],
-    devtool: "inline-source-map",
-    devServer: {
-        static: {
-            directory: path.join(__dirname, "dist"),
-          },
-        port: 8080,
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
     },
-}
+  },
+  plugins: [
+    new HtmlWebpackPlugin(),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: '**/*',
+          context: 'src',
+          globOptions: {
+            ignore: ['**/*.ts', '**/*.js', '**/*.fs', '**/*.vs', '**/*.txt']
+          },
+          noErrorOnMissing: true,
+        },
+        {
+          from: '**/*',
+          context: 'assets',
+          noErrorOnMissing: true,
+        }
+      ],
+    }),
+  ],
+  devtool: 'inline-source-map',
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    port: 8080,
+  },
+};
